@@ -1,26 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Component } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+type MyProps = {};
+type MyState = { produto: string};
+
+export default class App extends Component<MyProps, MyState> {
+
+  constructor(props: MyProps) {
+
+    super(props);
+
+    this.state = {
+
+      produto: "",
+    };
+
+    this.setProduto = this.setProduto.bind(this);
+
+
+  }
+
+  setProduto(produto: string) {
+
+    this.setState({ produto })
+
+  }
+
+  componentDidMount() {
+
+    this.setProduto("Thorin");
+
+  }
+
+  render() {
+
+    return(
+
+      <div>
+
+          <input
+            type = "text"
+            placeholder = "produto"
+            value = {this.state.produto}
+            onChange = {(event) => this.setProduto(event.target.value)}
+
+          />
+          <h2>{this.state.produto}</h2>
+      </div>
+    );
+  }
 }
-
-export default App;
